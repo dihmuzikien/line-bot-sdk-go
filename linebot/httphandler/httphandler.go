@@ -18,7 +18,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/dihmuzikien/line-bot-sdk-go/linebot"
 )
 
 // EventsHandlerFunc type
@@ -67,7 +67,7 @@ func (wh *WebhookHandler) NewClient(options ...linebot.ClientOption) (*linebot.C
 }
 
 func (wh *WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	events, err := linebot.ParseRequest(wh.channelSecret, r)
+	events, err := linebot.ParseRequest(wh.channelSecret, r.Header.Get("X-Line-Signature"), r.Body)
 	if err != nil {
 		if wh.handleError != nil {
 			wh.handleError(err, r)

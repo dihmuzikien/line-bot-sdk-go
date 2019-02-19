@@ -604,7 +604,9 @@ func TestParseRequest(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		gotEvents, err := client.ParseRequest(r)
+		r.Header.Get("X-Line-Signature")
+
+		gotEvents, err := client.ParseRequest(r.Header.Get("X-Line-Signature"), r.Body)
 		if err != nil {
 			if err == ErrInvalidSignature {
 				w.WriteHeader(400)
@@ -719,8 +721,6 @@ func BenchmarkParseRequest(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		req, _ := http.NewRequest("POST", "", bytes.NewReader(body))
-		req.Header.Set("X-Line-Signature", sign)
-		client.ParseRequest(req)
+		client.ParseRequest(sign, bytes.NewReader(body))
 	}
 }

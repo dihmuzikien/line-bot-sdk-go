@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/dihmuzikien/line-bot-sdk-go/linebot"
 )
 
 func ExampleIDsScanner() {

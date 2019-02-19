@@ -1,3 +1,7 @@
+# Disclaimer!
+
+This is not an official repository of the SDK. Go Here(github.com/line/line-bot-sdk-go) for that. This SDK is modified for my own convenience
+
 # line-bot-sdk-go
 
 [![Build Status](https://travis-ci.org/line/line-bot-sdk-go.svg?branch=master)](https://travis-ci.org/line/line-bot-sdk-go)
@@ -17,14 +21,14 @@ Japanese: https://developers.line.me/ja/docs/messaging-api/reference/
 ## Installation ##
 
 ```sh
-$ go get github.com/line/line-bot-sdk-go/linebot
+$ go get github.com/dihmuzikien/line-bot-sgdk-o
 ```
 
 ## Configuration ##
 
 ```go
 import (
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/dihmuzikien/line-bot-sdk-go"
 )
 
 func main() {

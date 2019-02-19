@@ -24,7 +24,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/dihmuzikien/line-bot-sdk-go/linebot"
 )
 
 var testRequestBody = `{
