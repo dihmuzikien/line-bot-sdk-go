@@ -19,23 +19,22 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
+	"io"
 	"io/ioutil"
-	"net/http"
 )
 
 // ParseRequest method
-func (client *Client) ParseRequest(r *http.Request) ([]*Event, error) {
-	return ParseRequest(client.channelSecret, r)
+func (client *Client) ParseRequest(requestSignature string, r io.Reader) ([]*Event, error) {
+	return ParseRequest(client.channelSecret, requestSignature, r)
 }
 
 // ParseRequest func
-func ParseRequest(channelSecret string, r *http.Request) ([]*Event, error) {
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
+func ParseRequest(channelSecret, requestSignature string, r io.Reader) ([]*Event, error) {
+	body, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
-	if !validateSignature(channelSecret, r.Header.Get("X-Line-Signature"), body) {
+	if !validateSignature(channelSecret, requestSignature, body) {
 		return nil, ErrInvalidSignature
 	}
 
